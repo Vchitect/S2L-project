@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SEINE: Short-to-Long Vidoes Diffusion Model for Generative Transition and Prediction">
+  <meta name="keywords" content="SHORT-TO-LONG">
+<!--  <meta name="viewport" content="width=device-width, initial-scale=2">-->
+  <meta name="viewport" content="width=device-width">
+  <title>SEINE: Short-to-Long Vidoes Diffusion Model for Generative Transition and Prediction</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9VZKE74FPW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<style>
+  body {
+    max-width: 2400px;
+    margin: 0 auto;
+  }
+</style>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+  <!--    <div class="container is-max-desktop">-->
+        <div class="container is-fullhd">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title"> SEINE: Short-to-Long Video Diffusion Model for Generative Transition and Prediction </h1>
+            <div class="is-size-5 publication-authors">
+              
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=3fWSC8YAAAAJ">Xinyuan Chen</a><sup>1*</sup>,</span>
+                <span class="author-block">
+                <a href="https://wyhsirius.github.io/">Yaohui Wang</a><sup>1*</sup>,</span>
+                <span class="author-block">
+                Lingjun Zhang</a><sup>2,1</sup>,</span>
+              <span class="author-block">
+                Shaobin Zhuang</a><sup>1,3</sup>,</span>
+              <span class="author-block">  
+                <a href="https://maxin-cn.github.io/">Xin Ma</a><sup>4,1;</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=iH0Aq0YAAAAJ&hl=en">Jiashuo Yu</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=hD948dkAAAAJ&hl=zh-CN">Yali Wang</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="http://dahua.site/">Dahua Lin</a><sup>1&dagger;</sup>,</span>
+                <span class="author-block">
+                <a href="https://scholar.google.com.hk/citations?user=gFtI-8QAAAAJ&hl=zh-CN">Yu Qiao</a><sup>1&dagger;</sup>,</span>
+                <span class="author-block">
+                <a href="https://liuziwei7.github.io/">Ziwei Liu</a><sup>6&dagger;</sup></span>
+            </div>
+  
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Shanghai Artificial Intelligence Laboratory&nbsp</span>
+                <span class="author-block"><sup>2</sup>East China Normal University&nbsp</span>
+                <span class="author-block"><sup>3</sup>Shanghai Jiao Tong University&nbsp</span>
+              <span class="author-block"><sup>4</sup>Monash University &nbsp</span>
+              <span class="author-block"><sup>5</sup>Shenzhen Institutes of Advanced Technology, Chinese Academy of Sciences &nbsp</span>
+              <span class="author-block"><sup>6</sup>S-Lab, Nanyang Technological University</span>
+            </div>
+  
+              <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Equal contribution</span> 
+            </div>
+
+  
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2309.15103"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2309.15103"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+  <!--               <span class="link-block">
+                  <a href=""
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/Vchitect/SEINE"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    </a>
+                </span>
+  
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="columns is-centered has-text-centered">
+      <div class="container is-max-maxwidth">
+
+        <h2 class="title is-3">Long Video Demo</h2>
+        <h2 class="title is-5">(Click image to play video.)</h2>
+        <h2 class="title is-5">The <span style="color:red;">red boxes</span> represent the transitions generated by our model, while the <span style="color:blue;">blue boxes</span> (in the end of video) represent the long-shot videos generated through prediction.</h2>
+
+          <div class="item item-toby">
+            <video width="1200" height="756" class="clickplay" style="border-radius: 10px;">
+              <source src="https://cdn-video.openxlab.org.cn/vod-e418e4/dfede7f02c1571ee80090764a0fd0102/90e5eeef7a994758be77534a8e45870f-faad6b4155f4b8c1175099f64f494fef-2k-nbv1.mp4" type="video/mp4">
+            </video> 
+          </div>
+          <div class="content" style="font-family: Arial; font-style: italic">
+            Adventure of a Panda.
+          </div>      
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="columns is-centered has-text-centered">
+      <div class="container is-max-maxwidth">
+
+        <h2 class="title is-3">Transition Results</h2>
+        <h2 class="title is-5">(Click image to play video)</h2>
+
+
+        <div class="columns" style="margin-left: 100px;">
+
+          <div class="column is-5" style="display: flex; justify-content: space-between; margin-left: 50px;">  
+            <div>
+              <img width="256" height="256" src="static/transition/spiderman/spiderman.png">
+              <p>Scene 1</p>
+            </div>
+            <div style="margin-left: 25px;"></div>
+            <div>
+              <img width="256" height="256" src="static/transition/spiderman/sand.png">
+              <p>Scene 2</p>
+            </div>  
+          </div>
+          
+
+          <!-- Column for videos -->
+          <div class="column is-5">
+
+              <!-- 1 column-->
+
+                <video width="400" height="400" class="clickplay" style="border-radius: 10px; margin-right: 100px;">
+                  <source src="static/transition/spiderman/spiderman-becomes-a-sand-sculpture.mp4" type="video/mp4">
+                </video> 
+                <div class="content" style="font-family: Arial; font-style: italic; margin-right: 100px">
+                  Spiderman becomes a sand sculpture.
+                </div>
+          </div>
+
+        </div>
+
+        
+
+        <div class="columns" style="margin-left: 100px;">
+
+          <div class="column is-5" style="display: flex; justify-content: space-between; margin-left: 50px;">
+            <div>
+              <img width="256" height="256" src="static/transition/fly-through/image_1.png">
+              <p>Scene 1</p>
+            </div>
+            <div style="margin-left: 25px;"> <!-- 增加了这一行 -->
+              <img width="256" height="256" src="static/transition/fly-through/image_2.png">
+              <p>Scene 2</p>
+            </div>  
+          </div>
+
+        
+          <!-- Column for videos -->
+          <div class="column is-5">
+        
+            <!-- 1 column-->
+        
+            <video width="400" height="400" class="clickplay" style="border-radius: 10px; margin-right: 100px;">
+              <source src="static/transition/fly-through/Flying through the clouds, a landscape appears.mp4" type="video/mp4">
+            </video> 
+            <div class="content" style="font-family: Arial; font-style: italic;margin-right: 100px;">
+              Flying through the clouds, a landscape appears.
+            </div>
+          </div>
+        
+        </div>
+        
+
+        <div class="columns" style="margin-left: 100px;">
+
+          <div class="column is-5" style="display: flex; justify-content: space-between; margin-left: 50px;">
+            <div>
+              <img width="256" height="256" src="static/transition/cat/cat on the couch.png">
+              <p>Scene 1</p>
+            </div>
+            <div style="margin-left: 25px;"> <!-- 增加了这一行 -->
+              <img width="256" height="256" src="static/transition/cat/cat on the beach.png">
+              <p>Scene 2</p>
+            </div>  
+          </div>
+
+        
+          <!-- Column for videos -->
+          <div class="column is-5">
+        
+            <!-- 1 column-->
+        
+            <video width="400" height="400" class="clickplay" style="border-radius: 10px; margin-right: 100px;">
+              <source src="static/transition/cat/A cat from sitting on the coach transfer to lying on the sand.mp4" type="video/mp4">
+            </video> 
+            <div class="content" style="font-family: Arial; font-style: italic;margin-right: 100px;">
+              A cat from sitting on the coach transfer to lying on the sand.
+            </div>
+          </div>
+        
+        </div>
+
+
+
+
+        <div class="columns">
+
+          <div class="column is-5" style="display: flex; justify-content: space-between; margin-left: 100px;">
+            <div>
+              <img width="256" height="160" src="static/transition/panda/1.png">
+              <p style="margin-bottom: 20px;">Scene 1</p>
+            </div>
+            <div>
+              <img width="256" height="160" src="static/transition/panda/15.png">
+              <p>Scene 2</p>
+            </div>  
+          </div>
+          
+
+          <!-- Column for videos -->
+          <div class="column is-5" >
+
+              <!-- 1 column-->
+
+                <video width="512" height="320" class="clickplay" style="border-radius: 10px;">
+                  <source src="static/transition/panda/The panda is diligently working in the office, focusing on reading a paper.mp4" type="video/mp4">
+                </video> 
+                <div class="content" style="font-family: Arial; font-style: italic">
+                  The panda is diligently working in the office and reading a paper.
+                </div>
+          </div>
+
+        </div>
+
+
+        <div class="columns">
+
+          <!-- Column for images -->
+          <div class="column is-5" style="display: flex; justify-content: space-between; margin-left: 100px;">
+            <div>
+              <video width="256" height="160" class="clickplay">
+                <source src="static/transition/season-transition/autumn-video-15_0033-.mp4" type="video/mp4">
+              </video> 
+              <div class="content" style="font-family: Arial; font-style: italic">
+                Scene 1.
+              </div>
+            </div>
+            <div>
+              <video width="256" height="160" class="clickplay">
+                <source src="static/transition/season-transition/winter-video-15_0033-.mp4" type="video/mp4">
+              </video> 
+              <div class="content" style="font-family: Arial; font-style: italic">
+                Scene 2.
+              </div>
+            </div>
+          </div>
+          
+
+          <!-- Column for videos -->
+          <div class="column is-5">
+
+              <!-- 1 column-->
+
+                <video width="512" height="320" class="clickplay" style="border-radius: 10px;">
+                  <source src="static/transition/season-transition/transition-landscape from autumn transfer to winter.mp4" type="video/mp4">
+                </video> 
+                <div class="content" style="font-family: Arial; font-style: italic">
+                  Landscape from autumn transfer to winter.
+                </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="columns is-centered has-text-centered">
+      <div class="container is-max-maxwidth">
+
+        <h2 class="title is-3">Image-to-Video Generation</h2>
+        <h2 class="title is-5">(Click image to play video)</h2>
+
+        <!-- New row for images and videos -->
+
+        <div class="columns">
+
+          <!-- Column for images -->
+          <div class="column is-5" style="margin-left: 100px;">
+            <div>
+              <img width="256" height="160" src="static/image-animation/spaceship/1.jpg">
+              <p>Input image</p>
+            </div>
+          </div>
+
+          <!-- Column for videos -->
+          <div class="column is-5">
+
+              <!-- 1 column-->
+
+                <video width="512" height="320" class="clickplay" style="border-radius: 10px;">
+                  <source src="static/image-animation/spaceship/clip_video_0000.mp4" type="video/mp4">
+                </video> 
+                <div class="content" style="font-family: Arial; font-style: italic">
+                  Spaceship in the style of star wars, flying in space.
+                </div>
+          </div>
+
+        </div>
+
+        <div class="columns">
+
+          <!-- Column for images -->
+          <div class="column is-5" style="margin-left: 100px;">
+            <div>
+              <img width="256" height="160" src="static/image-animation/ucfo/1.jpg">
+              <p>Input Image</p>
+            </div>
+            
+          </div>
+
+          <!-- Column for videos -->
+          <div class="column is-5">
+
+              <!-- 1 column-->
+
+                <video width="512" height="320" class="clickplay" style="border-radius: 10px;">
+                  <source src="static/image-animation/ucfo/ufos is.mp4" type="video/mp4">
+                </video> 
+                <div class="content" style="font-family: Arial; font-style: italic">
+                  Ufos is flying in space.
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+	  <div class="columns is-centered has-text-centered">
+    <div class="container is-max-maxwidth">
+		
+		<h2 class="title is-3">Diverse Results for Transition</h2>
+		<h2 class="title is-5">Example 1(Click image to play transition video)</h2>
+		
+	  <img width="358" height="358" src="static/diverse/reference-scene/1-Close-up shot of a blooming cherry tree, realism-1.png">	  
+	  <img width="358" height="358" src="static/diverse/reference-scene/2-Wide angle shot of an alien planet with cherry blossom forest-2.png">
+	  <p>Reference scenes</p>  
+		
+      <div id="results-carousel" class="carousel results-carousel">
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+              <div class="item item-toby">
+			  <video width="412" height="400" class="clickplay">
+				  <source src="static/diverse/osmooth transition, slow motion_0009_755.mp4" type="video/mp4">
+			  </video> 
+              </div>
+              <div class="content" style="font-family: Arial; font-style: italic">
+                Transition 1.
+              </div>
+
+          </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="412" height="412" class="clickplay">
+        <source src="static/diverse/rsmooth transition, slow motion_0014_755.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 2.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="512" class="clickplay">
+        <source src="static/diverse/rsmooth transition, slow motion_0001_755.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 3.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="512" class="clickplay">
+        <source src="static/diverse/smooth transition, slow motion_0000_005.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 4.
+            </div>
+
+        </div>
+
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="512" class="clickplay">
+        <source src="static/diverse/Travel from Earth's spring blossoms to the alien cherry blossom forestssmooth transition, slow motion_0000_003.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 5.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="512" class="clickplay">
+        <source src="static/diverse/smooth transition, slow motion_0000_417.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 6.
+            </div>
+
+        </div>
+
+      </div>
+      <div class="content" style="font-family: Arial; font-style: italic">
+        Smooth transition.
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="columns is-centered has-text-centered">
+    <div class="container is-max-maxwidth">
+		<h2 class="title is-5">Example 2(Click image to play transition video)</h2>
+		
+	  <img width="358" height="224" src="static/diverse/reference-scene/1.png">	  
+	  <img width="358" height="224" src="static/diverse/reference-scene/16.png">
+	  <p>Reference scenes</p>  
+		
+      <div id="results-carousel" class="carousel results-carousel">
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+              <div class="item item-toby">
+			  <video width="512" height="320" class="clickplay">
+				  <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_316.mp4" type="video/mp4">
+			  </video> 
+              </div>
+              <div class="content" style="font-family: Arial; font-style: italic">
+                Transition 1.
+              </div>
+
+          </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="320" class="clickplay">
+        <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_933.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 2.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="320" class="clickplay">
+        <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_584.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 3.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="320" class="clickplay">
+        <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_682.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 4.
+            </div>
+
+        </div>
+
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="320" class="clickplay">
+        <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_731.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 5.
+            </div>
+
+        </div>
+
+          <!-- 1 column-->
+          <div class="column is-multiline">
+
+            <div class="item item-toby">
+      <video width="512" height="320" class="clickplay">
+        <source src="static/diverse/The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition._0000_735.mp4" type="video/mp4">
+      </video> 
+            </div>
+            <div class="content" style="font-family: Arial; font-style: italic">
+              Transition 6.
+            </div>
+
+        </div>
+
+      </div>
+      <div class="content" style="font-family: Arial; font-style: italic">
+        The scene has changed from the panda from the raccoon eys into a playing trumpet raccoon. smooth transition.
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
+
+
+
+
+<section class="hero is-light is-small">
+  <div class="hero-body">
+	  <div class="columns is-centered has-text-centered">
+    <div class="container is-max-maxwidth">
+		
+		<h2 class="title is-3">Auto-regressive Video Prediction Results</h2>
+		<h2 class="title is-5">(Click image to play video)</h2>
+		
+    <div id="results-carousel" class="carousel results-carousel">
+
+      <!-- 1 column-->
+      <div class="column is-multiline">
+
+        <div class="item item-toby">
+  <video width="512" height="320" class="clickplay">
+    <source src="static/long-video/ironman.mp4" type="video/mp4">
+  </video> 
+        </div>
+        <div class="content" style="font-family: Arial; font-style: italic">
+          Ironman flying in the sky.
+        </div>
+
+    </div>
+      <!-- 2 column-->
+      <div class="column is-multiline">
+
+          <div class="item item-toby">
+    <video width="512" height="320" class="clickplay">
+      <source src="static/long-video/a beautiful coastal beach in spring, waves lapping on sand by Vincent van Gogh.mp4" type="video/mp4">
+    </video> 
+          </div>
+          <div class="content" style="font-family: Arial; font-style: italic">
+            A beautiful coastal beach in spring, waves lapping on sand by Vincent van Gogh.
+          </div>
+
+      </div>
+
+      <!-- 3 column-->
+      <div class="column is-multiline">
+
+           <div class="item item-toby">
+          <video width="512" height="320" class="clickplay">
+      <source src="static/long-video/A raccoon dressed in suit playing the trumpet, stage background, 4k, high resolution.mp4" type="video/mp4">
+    </video>
+          </div>
+          <div class="content" style="font-family: Arial; font-style: italic">
+            A raccoon dressed in suit playing the trumpet, stage background, 4k, high resolution.
+          </div>
+
+      </div>
+
+      <!-- 4 column-->
+      <div class="column is-multiline">
+
+          <div class="item item-toby">
+          <video width="512" height="320" class="clickplay">
+      <source src="static/long-video/A teddy bear washing the dishes.mp4" type="video/mp4">
+
+    
+    </video>
+          </div>
+          <div class="content" style="font-family: Arial; font-style: italic">
+            A teddy bear washing the dishes.
+          </div>
+
+
+      </div>
+
+      <!-- 5 column-->
+      <div class="column is-multiline">
+          <div class="item item-toby">
+          <video width="512" height="320" class="clickplay">
+      <source src="static/long-video/a-panda-playing-on-a-swing-set.mp4" type="video/mp4">
+    </video>
+          </div>
+          <div class="content" style="font-family: Arial; font-style: italic">
+            A-panda-playing-on-a-swing-set.
+          </div>
+      </div>
+
+  </div>
+	  
+
+    
+    </div>
+  </div>
+</div>
+</section>
+
+
+
+
+
+
+
+<section class="section">
+  <div class="container is-fullhd">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Recently video generation has achieved substantial progress with realistic results. Nevertheless, existing AI-generated videos are usually very short clips ("shot-level'') depicting a single scene. To deliver a coherent long video ("story-level''), it is desirable to have creative transition and prediction effects across different clips. This paper presents a short-to-long video diffusion model, SEINE, that focuses on generative transition and prediction. The goal is to generate high-quality long videos with smooth and creative transitions between scenes and varying lengths of shot-level videos. Specifically, we propose a random-mask video diffusion model to automatically generate transitions based on textual descriptions. By providing the images of different scenes as inputs, combined with text-based control, our model generates transition videos that ensure coherence and visual quality. Furthermore, the model can be readily extended to various tasks such as image-to-video animation and autoregressive video prediction. To conduct a comprehensive evaluation of this new generative task, we propose three assessing criteria for smooth and creative transition: temporal consistency, semantic similarity, and video-text semantic alignment. Extensive experiments validate the effectiveness of our approach over existing methods for generative transition and prediction, enabling the creation of story-level long videos.
+          </p>
+        </div>
+      </div>
+    </div>
+
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+          <p>
+            Website adapted from the following <a rel="license"
+                                                href="https://github.com/nerfies/nerfies.github.io">source code</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+
+<script>
+var videos = document.getElementsByClassName("clickplay");
+for (var i = 0; i < videos.length; i++) {
+  videos[i].addEventListener("click", function() {
+    this.play();
+  });
+  videos[i].addEventListener("ended", function() {
+    this.pause();
+    this.currentTime = 0;
+  });
+}
+</script>
+
+</html>
